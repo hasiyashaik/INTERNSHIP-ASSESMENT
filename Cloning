@@ -1,0 +1,39 @@
+class Organization implements Cloneable {
+    String orgCode;
+    String orgName;
+    String orgAddress;
+
+    // Constructor
+    public Organization(String orgCode, String orgName, String orgAddress) {
+        this.orgCode = orgCode;
+        this.orgName = orgName;
+        this.orgAddress = orgAddress;
+    }
+
+    // Method to print object details
+    public void printDetails() {
+        System.out.println("Organization Code: " + orgCode);
+        System.out.println("Organization Name: " + orgName);
+        System.out.println("Organization Address: " + orgAddress);
+    }
+
+    // Override clone method
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Organization org1 = new Organization("123", "ABC Corp", "123 Main St");
+        
+        // Cloning the object
+        Organization org2 = (Organization) org1.clone();
+        
+        // Printing details of both objects
+        System.out.println("Original Organization:");
+        org1.printDetails();
+        
+        System.out.println("\nCloned Organization:");
+        org2.printDetails();
+    }
+}
