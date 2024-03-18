@@ -1,0 +1,42 @@
+import java.io.*;
+
+class Product implements Serializable {
+    int id;
+    String name;
+    String category;
+    double price;
+
+    // Constructor
+    public Product(int id, String name, String category, double price) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
+    // Method to deserialize a Product object
+    public static Product deserialize(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(filename);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        Product product = (Product) in.readObject();
+        in.close();
+        fileIn.close();
+        return product;
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Deserialize the object
+            Product product = Product.deserialize("product.ser");
+
+            // Display deserialized object
+            System.out.println("Deserialized Product:");
+            System.out.println("ID: " + product.id);
+            System.out.println("Name: " + product.name);
+            System.out.println("Category: " + product.category);
+            System.out.println("Price: " + product.price);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
